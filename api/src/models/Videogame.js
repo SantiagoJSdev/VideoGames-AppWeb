@@ -8,5 +8,28 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    idGame: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    releaseDate: {
+      type: DataTypes.STRING,
+    },
+    rating: {
+      type: DataTypes.FLOAT,
+    },
+    platform: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  }, {
+    timestamps: false
   });
+  
 };
