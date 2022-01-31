@@ -22,6 +22,14 @@ console.log(maximo)
     const handlePrevPage = () => {
       setpage(page - 1)
     }
+    if (page === 0 ) {
+      setpage(1)
+    }
+    if (page === 8 ) {
+      setpage(7)
+      console.log('hola')
+    }
+    console.log(page)
   return <>
 
           <form>
