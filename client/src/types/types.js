@@ -3,5 +3,8 @@
 
 export const types =  {
 
-    GETDATA: '[GAMES] games'
+    GETDATA: '[GAMES] games',
+    ORDERBYSORT: '[SORT] a-z',
+    ORDERBYRATING: '[RATING] +-'
+
 };

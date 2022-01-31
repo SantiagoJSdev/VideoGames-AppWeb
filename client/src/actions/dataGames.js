@@ -15,3 +15,17 @@ export const startAdd = (data) => {
         payload: data
     }
 }
+
+export const orderBySort = (value) => {
+    return {
+        type: types.ORDERBYSORT,
+        payload: value
+    }
+}
+
+export const orderByRating = (value) => {
+    return {
+        type: types.ORDERBYRATING,
+        payload: value
+    }
+}
