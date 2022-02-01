@@ -14,6 +14,16 @@ export const gameReducer = (state = {}, action) => {
                 dataGame: action.payload
             }
 
+        case types.GETDATABYNAME:
+            return {
+                ...state,
+                dataName: action.payload
+                }
+        case types.DELETEBYNAME:
+            return {
+                ...state,
+                dataName: []
+                        }
         case types.ORDERBYSORT:
             let sortBy = action.payload === 'A-Z' ?
             state.dataGame.sort((a,b)=> (a.name > b.name) ? 1 : (b.name > a.name) ? -1 : 0 )

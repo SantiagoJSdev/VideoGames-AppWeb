@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    idGame: {
+    id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
@@ -22,10 +22,13 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     rating: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.REAL,
     },
-  }, {
-    timestamps: false
+    created: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    }
   });
   
 };

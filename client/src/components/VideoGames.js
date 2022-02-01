@@ -12,7 +12,7 @@ import '../styles/videoGamesStyle.css'
 import { useSelect } from '../hooks/useSelect';
 import { getGameByGenre } from '../selectors/getGameByGenre';
 import { Nav } from './Nav';
-import { orderByRating, orderBySort } from '../actions/dataGames';
+import { orderByRating, orderBySort, postVideoGame, startDataGamesByName } from '../actions/dataGames';
 
 
 export const VideoGames = () => {
@@ -39,7 +39,7 @@ export const VideoGames = () => {
 
   const [selectValue, handleSelectChange] = useSelect('0')
   
-  const gameFilterByName = useMemo(() => getGameByName( q, state.dataGame ), [q, state.dataGame ])
+  // const gameFilterByName = useMemo(() => getGameByName( q, state.dataGame ), [q, state.dataGame ])
   const gameFilterByGenre = useMemo(() => getGameByGenre(state.dataGame, selectValue ), [ state.dataGame, selectValue ])
 
   if (!state.dataGame) {
@@ -62,7 +62,10 @@ export const VideoGames = () => {
     const handleSearchSubmit = (e) => {
       e.preventDefault()
       navigate(`?q=${searchText}`)
+     
+      dispatch(startDataGamesByName(searchText))
       reset()
+      navigate('/search')
     }
     
     const handleSort = (e) => {
@@ -75,6 +78,19 @@ export const VideoGames = () => {
       e.preventDefault();
       console.log(e.target.value)
       dispatch(orderByRating(e.target.value))
+    }
+
+    const onclick20 = () => {
+      const data =   {
+        name: 'santiagoa',
+        description: 'hjghjgjgjhdshfah',
+        gender: "Action",
+        platforms: "Xbox One"
+      }
+      postVideoGame(data)
+      console.log('click')
+    
+
     }
    
   return <>
@@ -113,15 +129,15 @@ export const VideoGames = () => {
           </div>
 
           {
-            (gameFilterByName.length > 0) ?
-            <ul>
-           {
-            gameFilterByName.map(game => (
-              <li key={game.id}>{game.name}</li>
-            ))
-            }
-            </ul>
-            :
+            // (gameFilterByName.length > 0) ?
+          //   <ul>
+          //  {
+          //   gameFilterByName.map(game => (
+          //     <li key={game.id}>{game.name}</li>
+          //   ))
+          //   }
+          //   </ul>
+          //   :
 
             (gameFilterByGenre.length > 0) ?
               <div>
@@ -152,7 +168,7 @@ export const VideoGames = () => {
             
           }
          
-
+<button onClick={onclick20}> adddddddddddd</button>
 
   </>;
 };
