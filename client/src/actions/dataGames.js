@@ -72,3 +72,20 @@ export const postVideoGame = async (data)=> {
         console.log(resul)
         return resul
 }
+export const startDataGenres = () => {
+    return async (dispatch)=> {
+        try{
+        let resp = await fetch('http://localhost:3001/genres')
+        let data  = await resp.json()
+        dispatch(startAddGenres(data))
+        }catch(e) {
+        console.log('genres not found')
+    }
+}
+}
+export const startAddGenres = (data) => {
+    return {
+        type: types.GETDATABYGENRES,
+        payload: data
+    }
+}

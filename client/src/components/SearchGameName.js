@@ -15,15 +15,27 @@ export const SearchGameName = () => {
         navigate('/videogame')
     }
 
-
+    if (!state) {
+      return <h1>Loading</h1>
+    }
+console.log(state)
+// console.log(state.length)
+console.log(!state)
+console.log(!!state)
   return <>
       <button onClick={handleReturn}>return</button>
       <ul>
     {
-       
+       (state.length > 0) ?
         state?.map(ele=>(
-            <li key={ele.id}>{ele.name}</li>
-        ))
+          <li key={ele.id}>{ele.name}</li>
+      ))
+      :
+      <h2>
+
+      <p>{state.msg}</p>
+      </h2>
+      
       
     }
       </ul>

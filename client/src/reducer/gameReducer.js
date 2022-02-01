@@ -13,6 +13,11 @@ export const gameReducer = (state = {}, action) => {
                 ...state,
                 dataGame: action.payload
             }
+        case types.GETDATABYGENRES:
+            return {
+                ...state,
+                dataGenres: action.payload
+            }
 
         case types.GETDATABYNAME:
             return {
