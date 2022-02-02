@@ -2,16 +2,16 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import './App.css';
 
-import {startDataGames} from './actions/dataGames'
-import { useDispatch } from 'react-redux';
+// import {startDataGames} from './actions/dataGames'
+// import { useDispatch } from 'react-redux';
 
 function App() {
 
   const navigate = useNavigate()
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const handleScreemPrincipal = async () => {
-    dispatch(startDataGames()) 
+  const handleScreemPrincipal = () => {
+    // dispatch(startDataGames()) 
     navigate('/videogame')
    
   }

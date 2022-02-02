@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {usePage} from '../hooks/usePage'
 import { useForm } from '../hooks/useForm'
 
@@ -12,13 +12,16 @@ import '../styles/videoGamesStyle.css'
 import { useSelect } from '../hooks/useSelect';
 import { getGameByGenre } from '../selectors/getGameByGenre';
 import { Nav } from './Nav';
-import { orderByRating, orderBySort, postVideoGame, startDataGamesByName } from '../actions/dataGames';
+import { orderByRating, orderBySort, postVideoGame, startDataGames, startDataGamesByName } from '../actions/dataGames';
 
 
 export const VideoGames = () => {
   const dispatch = useDispatch();
   const state = useSelector( state => state );
   
+useEffect(() => {
+  dispatch(startDataGames()) 
+}, []);
 
 
   const location = useLocation();
@@ -89,10 +92,10 @@ export const VideoGames = () => {
       }
       postVideoGame(data)
       console.log('click')
-    
-
     }
-   
+    const handleCreate = () => {
+      navigate('/create')
+    }
   return <>
 
           <form onSubmit={handleSearchSubmit}>
@@ -156,8 +159,11 @@ export const VideoGames = () => {
               />
             {
               state.dataGame?.slice((page - 1) * maximo, (page - 1) * maximo + maximo).map(game=> (
-                <li key={game.id}> <p>{JSON.stringify(game.name)}</p>
+                <li key={game.id}>
+                  <Link to= {`/detail/${game.id}`}>
+                  <p>{JSON.stringify(game.name)}</p>
                   <img src={game.image} alt={game.name} />
+                  </Link>
                 </li>
               ))
             }
@@ -169,6 +175,6 @@ export const VideoGames = () => {
           }
          
 <button onClick={onclick20}> adddddddddddd</button>
-
+<button onClick={handleCreate}> creacion de video juego</button>
   </>;
 };
