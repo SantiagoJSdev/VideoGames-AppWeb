@@ -1,4 +1,10 @@
 
+export const plataforma =  ['Xbox One', 'Xbox Series S/X', 'Xbox 360', 'PlayStation 3', 
+'PlayStation 4', 'PlayStation 5', 'PC', 'Nintendo Switch', 'Linux', 'macOS', 'Android',
+ 'iOS', 'Xbox', 'PS Vita', 'Web', 'Wii U', 'Nintendo 3DS', 'PlayStation 2']
+
+
+//  18
 
 export const dataPrueba = [
   {

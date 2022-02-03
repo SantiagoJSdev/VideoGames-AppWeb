@@ -6,13 +6,14 @@ import { useForm } from '../hooks/useForm'
 
 import queryString from 'query-string';
 
-import {getGameByName} from '../selectors/getGameByName'
+// import {getGameByName} from '../selectors/getGameByName'
 
 import '../styles/videoGamesStyle.css'
 import { useSelect } from '../hooks/useSelect';
 import { getGameByGenre } from '../selectors/getGameByGenre';
 import { Nav } from './Nav';
-import { orderByRating, orderBySort, postVideoGame, startDataGames, startDataGamesByName } from '../actions/dataGames';
+import { orderByRating, orderBySort, postVideoGame, startDataGames, startDataGamesByName, startDataGenres } from '../actions/dataGames';
+
 
 
 export const VideoGames = () => {
@@ -21,7 +22,8 @@ export const VideoGames = () => {
   
 useEffect(() => {
   dispatch(startDataGames()) 
-}, []);
+  dispatch(startDataGenres())
+}, [dispatch]);
 
 
   const location = useLocation();
@@ -84,14 +86,14 @@ useEffect(() => {
     }
 
     const onclick20 = () => {
-      const data =   {
-        name: 'santiagoa',
-        description: 'hjghjgjgjhdshfah',
-        gender: "Action",
-        platforms: "Xbox One"
-      }
-      postVideoGame(data)
-      console.log('click')
+      // const data =   {
+      //   name: 'santiagoa',
+      //   description: 'hjghjgjgjhdshfah',
+      //   gender: "Action",
+      //   platforms: "Xbox One"
+      // }
+      // postVideoGame(data)
+      
     }
     const handleCreate = () => {
       navigate('/create')

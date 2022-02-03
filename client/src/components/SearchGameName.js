@@ -18,10 +18,7 @@ export const SearchGameName = () => {
     if (!state) {
       return <h1>Loading</h1>
     }
-console.log(state)
-// console.log(state.length)
-console.log(!state)
-console.log(!!state)
+
   return <>
       <button onClick={handleReturn}>return</button>
       <ul>
