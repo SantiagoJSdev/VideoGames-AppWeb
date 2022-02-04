@@ -12,7 +12,7 @@ import '../styles/videoGamesStyle.css'
 import { useSelect } from '../hooks/useSelect';
 import { getGameByGenre } from '../selectors/getGameByGenre';
 import { Nav } from './Nav';
-import { orderByRating, orderBySort, postVideoGame, startDataGames, startDataGamesByName, startDataGenres } from '../actions/dataGames';
+import { orderByRating, orderBySort, startDataGames, startDataGamesByName, startDataGenres } from '../actions/dataGames';
 
 
 
