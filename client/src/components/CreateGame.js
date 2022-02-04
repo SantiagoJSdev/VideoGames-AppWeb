@@ -3,50 +3,50 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { useForm } from '../hooks/useForm';
 
+import '../styles/createGameStyles.css'
+
 
 
 import { getPlatforms } from '../selectors/getPlatforms';
+import { validate } from '../selectors/validate';
+import { validateGlobal } from '../selectors/validateGlobal';
 
 export const CreateGame = () => {
+
+
 
   const state = useSelector( state => state );
   const [addPlatform, setaddPlatform] = useState([]);
   const [addGenres, setaddGenres] = useState([]
   );
 
-useEffect(() => {
-  console.log(addPlatform)
-}, [addPlatform]);
 
-  // genres: {
-  //   data: [],
-  //   completado: false
-  // }
-  // setaddPlatform({...addPlatform, genres:{...addPlatform.genres, data:[...addPlatform.genres.data, data.name], completado: true}})
-  // setaddPlatform( addP => ( {...addP, genres:[...addP.genres, {data: data.name, completado: !addP.genres.completado}]}))
 
-  const [value, handleInputChange, reset] = useForm({
+  const [value, handleInputChange, reset, error] = useForm({
     name: '',
     descripción: '',
     released: '',
     rating: '',
-  
   });
   const {name, descripción, released, rating} = value;
-
+  useEffect(() => {
+    console.log(error)
+   
+    
+  }, [value]);
+  // 
 
   const platformTotal = getPlatforms(state.dataGame)
   
-
-  const handleAdd = () => {
-    console.log('click')
-  }
-  const handleSubmit = (e) => {
-    e.preventDefault()
  
-    reset()
+  const handleAdd = () => {
+
+   
+   
+    console.log('resul')
   }
-const handlePlatform =(id, name)=> {
+ 
+  const handlePlatform =(e,id, name)=> {
   
   let data = platformTotal.find(plat => plat.id === id)
   let resul = false
@@ -60,6 +60,22 @@ const handlePlatform =(id, name)=> {
     return  setaddPlatform( a =>  [...a, {name: data.name, completado: true}])
     }
 }
+
+
+
+const handleSubmit = (e) => {
+  e.preventDefault()
+
+
+console.log(validateGlobal(value, addPlatform, addGenres))
+
+ let a = e.target.check
+ a.forEach(ele => ele.checked = false)
+ reset()
+  
+}
+
+
 const handleGenres = (id, name) => {
     let data = state.dataGenres.find(genre => genre.id === id)
     let resul = false
@@ -75,40 +91,40 @@ const handleGenres = (id, name) => {
       if (!resul) {
       return  setaddGenres( a =>  [...a, {name: data.name, completado: true}])
       }
-     
-      
-      
-  
-      
-    
-  //  if (addPlatform.genres?.length > 0){
-  //   setaddPlatform(a => a.genres.map(item => item.data === name ? {...item, completado: !item.completado} : item)) 
- 
 }
-
 
   if ( !platformTotal.length ) {
     
     return <Navigate to="/videogame" />;
 }
 
+const focus = (e) => {
+  console.log('focus')
+  console.log(error)
+}
   return <>
   
             <div className='container-create'>
 
                 <form onSubmit={handleSubmit}>
-                    <label>Nombre</label>
-                    <input
-                    name='name'
-                    autoComplete='off'
-                    type='text'
-                    placeholder='Name'
-                    value={name}
-                    onChange={handleInputChange}
-                    ></input>
+                  <div>
+                      <label>Nombre</label>
+                      <input
+                      autoFocus
+                      className='input'
+                      name='name'
+                      autoComplete='off'
+                      type='text'
+                      placeholder='Name'
+                      value={name}
+                      onChange={handleInputChange}
+                      ></input>
+                       <div className='CreateValidation'>* Name is Required</div>
+                  </div>
 
                     <label>Descripción</label>
                     <input
+                       onFocus={focus}
                     name='descripción'
                     autoComplete='off'
                     type='text'
@@ -145,7 +161,7 @@ const handleGenres = (id, name) => {
                         platformTotal.map(ele=> (
                           <div  key={ele.id}>
                           <li >{ele.name}
-                          <input type='checkbox' onClick={()=>handlePlatform(ele.id, ele.name)} ></input>
+                          <input name= {'check'} type='checkbox' defaultChecked = {false}  onClick={(e)=>handlePlatform(e,ele.id, ele.name)} ></input>
                           </li>
                           </div>
                         ))
@@ -165,7 +181,7 @@ const handleGenres = (id, name) => {
                         state.dataGenres.map(ele=> (
                           <div  key={ele.id}>
                           <li >{ele.name}
-                          <input type='checkbox' onClick={()=>handleGenres(ele.id, ele.name)} ></input>
+                          <input name= {'check'} type='checkbox' onClick={()=>handleGenres(ele.id, ele.name)} ></input>
                           </li>
                           </div>
                         ))
