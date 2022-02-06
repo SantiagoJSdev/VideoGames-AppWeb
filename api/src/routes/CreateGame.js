@@ -16,14 +16,13 @@ router.post("/", async (req, res) => {
     });
 
     let dbGenre = await Genre.findAll({
-        where: { name: genre }
+        where: { name: [...genre] }
     });
 
     let dbPlatform = await Platform.findAll({
-        where: { name: platform }
+        where: { name: [...platform] }
     });
-    console.log(dbGenre)
-    console.log(dbPlatform,'*')
+    
     newGame.addGenres(dbGenre);
     newGame.addPlatforms(dbPlatform);
 

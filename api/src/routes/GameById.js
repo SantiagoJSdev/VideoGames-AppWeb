@@ -10,6 +10,7 @@ const { API_KEY } = process.env;
 
  router.get("/:id", async (req, res) => {
   const { id } = req.params;
+  
   try {
     if (id.includes("-")) { //detectar UUID en DB
       const gameDataBase = await Videogame.findOne({

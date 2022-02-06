@@ -33,12 +33,17 @@ export const gameReducer = (state = {}, action) => {
             return {
                 ...state,
                 dataName: []
-                        }
+                    }
+        case types.ADDBYGAMEIDDB:
+            return {
+                ...state,
+                dataGameById: action.payload
+                    }
         case types.ORDERBYSORT:
-            let sortBy = action.payload === 'A-Z' ?
-            state.dataGame.sort((a,b)=> (a.name > b.name) ? 1 : (b.name > a.name) ? -1 : 0 )
+            let sortBy = (action.payload === 'A-Z') ?
+            state.dataGame.sort((a,b)=> (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : (b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0 )
             :
-            state.dataGame.sort((a,b)=> (a.name > b.name) ? -1 : (b.name > a.name) ? 1 : 0 )
+            state.dataGame.sort((a,b)=> (a.name.toLowerCase() > b.name.toLowerCase()) ? -1 : (b.name.toLowerCase() > a.name.toLowerCase()) ? 1 : 0 )
             return {
                 ...state,
                 dataGame: sortBy

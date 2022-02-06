@@ -9,6 +9,9 @@ export const types =  {
     GETDATABYPLATFORM: '[PLATFORM] platform',
     DELETEBYNAME: '[GAMES] delete',
     ORDERBYSORT: '[SORT] a-z',
-    ORDERBYRATING: '[RATING] +-'
+    ORDERBYRATING: '[RATING] +-',
+    ADDBYGAMEIDDB: '[GAMEID] DATABASE',
+
+    ERRORCREATEGAME: '[ERROR] create'
 
 };

@@ -12,13 +12,14 @@ import '../styles/videoGamesStyle.css'
 import { useSelect } from '../hooks/useSelect';
 import { getGameByGenre } from '../selectors/getGameByGenre';
 import { Nav } from './Nav';
-import { orderByRating, orderBySort, postVideoGame, startDataGames, startDataGamesByName, startDataGenres, startDataPlatform } from '../actions/dataGames';
+import { orderByRating, orderBySort, startDataGames, startDataGamesByName, startDataGenres, startDataPlatform } from '../actions/dataGames';
 
 
 
 export const VideoGames = () => {
   const dispatch = useDispatch();
-  const state = useSelector( state => state );
+  const state = useSelector( state => state.game );
+
   
 useEffect(() => {
   dispatch(startDataGames()) 
@@ -38,18 +39,17 @@ useEffect(() => {
 
   const {maximo, page, setpage} = usePage()
 
-  const [formValues, handleInputChange, reset] = useFormVideoGame({
-    searchText: q
+  const [formValues, handleInputChange, reset, error] = useFormVideoGame({
+    name: q
   })
-  const {searchText} = formValues;
+  const {name} = formValues;
 
   const [selectValue, handleSelectChange] = useSelect('0')
  
   // const gameFilterByName = useMemo(() => getGameByName( q, state.dataGame ), [q, state.dataGame ])
   const gameFilterByGenre = useMemo(() => getGameByGenre(state.dataGame, selectValue ), [ state.dataGame, selectValue ])
-  useEffect(() => {
-    console.log(gameFilterByGenre)
-  }, [selectValue,state.dataGame]);
+ 
+
   if (!state.dataGame) {
     return <h2>Loaging..</h2>
   }
@@ -69,9 +69,9 @@ useEffect(() => {
 
     const handleSearchSubmit = (e) => {
       e.preventDefault()
-      navigate(`?q=${searchText}`)
+      navigate(`?q=${name}`)
      
-      dispatch(startDataGamesByName(searchText))
+      dispatch(startDataGamesByName(name))
       reset()
       navigate('/search')
     }
@@ -88,20 +88,7 @@ useEffect(() => {
       dispatch(orderByRating(e.target.value))
     }
 
-    const onclick20 = () => {
-      const data =   {
-        name: 'santiago',
-        description: 'hola',
-        rating: 1,
-        released: '11/10/2022',
-        platform: "Linux",
-        genre: "Action",
-    
-      }
-      postVideoGame(data)
-      dispatch(startDataGames()) 
-      
-    }
+   
     const handleCreate = () => {
       navigate('/create')
     }
@@ -111,10 +98,10 @@ useEffect(() => {
             <label>Buscar</label>
             <input
             type='text'
-            name='searchText'
+            name='name'
             autoComplete='off'
             placeholder='Agregar Titulo'
-            value={searchText}
+            value={name}
             onChange={handleInputChange}
             ></input>
           </form>
@@ -174,7 +161,7 @@ useEffect(() => {
             
           }
          
-<button onClick={onclick20}> adddddddddddd</button>
+
 <button onClick={handleCreate}> creacion de video juego</button>
   </>;
 };

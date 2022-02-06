@@ -69,7 +69,7 @@ export const postVideoGame = async (data)=> {
             body: JSON.stringify(data)
     });
         let resul = await post.json();
-        console.log(resul)
+   
         return resul
 }
 export const startDataGenres = () => {
@@ -104,6 +104,25 @@ export const startDataPlatform = () => {
 export const startAddPlatform = (data) => {
     return {
         type: types.GETDATABYPLATFORM,
+        payload: data
+    }
+}
+//////////////////////////////////////////
+export const startDataGamesByIdDataBase = (id) => {
+    return async (dispatch)=> {
+        try{
+            let resp = await fetch(`http://localhost:3001/videogames/${id}`)
+            let  data  = await resp.json()
+            dispatch(startAddByGameIdDB(data))
+        } catch(e) {
+            console.log('Id not found')
+        }
+        
+    }
+}
+export const startAddByGameIdDB = (data) => {
+    return {
+        type: types.ADDBYGAMEIDDB,
         payload: data
     }
 }

@@ -5,7 +5,7 @@ export const validateGlobal = (value, addPlatform = [], addGenres =[] ) => {
     if (value.name.trim().length === 0 || value.name.trim().length < 3) {
       errorGlobal.name = "Name require";
     }
-    if (!value.descripción.trim()) {
+    if (!value.description.trim()) {
       errorGlobal.description = "Description require";
     }
     if (!addPlatform.length) {

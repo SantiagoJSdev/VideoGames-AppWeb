@@ -6,7 +6,7 @@ import { deleteAddByName } from '../actions/dataGames';
 
 export const SearchGameName = () => {
 
-   const state = useSelector( state => state.dataName );
+   const state = useSelector( state => state.game.dataName );
    const dispatch = useDispatch();
    const navigate =  useNavigate()
 

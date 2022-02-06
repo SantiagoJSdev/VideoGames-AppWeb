@@ -1,28 +1,39 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Navigate, useParams } from 'react-router-dom';
-import { getGameById } from '../selectors/getGameById';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { startDataGamesByIdDataBase } from '../actions/dataGames';
+
 
 export const DetailPage = () => {
 
-
-    const state = useSelector( state => state.dataGame );
+    const dispatch = useDispatch();
     const {id} = useParams()
     
- 
-    const data =  getGameById(state, id);
-   
-    if ( !data.length ) {
-    
-        return <Navigate to="/videogame" />;
-    }
+    useEffect(() => {
+     
+        dispatch(startDataGamesByIdDataBase(id))
+        }, [dispatch, id]);
+        
+    const state = useSelector( state => state.game.dataGameById );
   
 
 
+    
+    console.log(state)
+    // aca obtengo el game x redux
+    // const state = useSelector( state => state.dataGame );
+    // const data =  getGameById(state, id);
+    if (!state) {
+        return <h1>Loading</h1>
+    }
+  
+    // if ( !Object.keys(state).length ) {
+    
+    //     return <Navigate to="/videogame" />;
+    // }
 
-if (!state) {
-    return <h1>Loading</h1>
-}
+
+   
 
 
   return <>
@@ -30,30 +41,35 @@ if (!state) {
             <div>
                 <ul>
                 {
-                  data?.map(game => (
+                        state ?
 
-                    <li key={game.id}>
-                        <h2>{game.name}</h2>
-                        <img src={game.image} alt={game.name} />
-                        <h3>{game.released}</h3>
-                        <h4>{game.rating}</h4>
+                        <li key={state.id}>
+                        <h2>{state.name}</h2>
+                         <img src={state.background_image} alt={state.name} />
+                        <h3>{state.released}</h3>
+                        <h4>{state.rating}</h4>
+                        <p>{state.description}</p>
 
-                        <p>genero</p>
-                       <ul>{
-                            game.genres.map(g => (
+                        <p>Genero</p>
+                        <ul>{
+                            state.genres.map(g => (
                                 <li key={g.id}>{g.name}</li>
                             ))
                         }</ul>
                         
                         <p>plataforma</p>
-                       <ul>{
-                            game.platforms.map(g => (
-                                <li key={g.id}>{g.name}</li>
+                        <ul>{
+                            state.platforms.map(g => (
+                              (g.platform) ? <li key={g.platform.id}>{g.platform.name}</li> 
+                              : 
+                              <li key={g.id}>{g.name}</li>
                             ))
-                        }</ul>
+                        }</ul> 
 
                     </li>
-                  ))      
+                    :
+                    ''
+    
                 }
                 </ul>
 

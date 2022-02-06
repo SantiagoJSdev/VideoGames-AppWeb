@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 
@@ -11,9 +11,14 @@ import { useForm } from '../hooks/useForm';
 import { validateGlobal } from '../selectors/validateGlobal';
 import { getArrayPlatform } from '../selectors/getArrayPlatform';
 import { getArrayGenres } from '../selectors/getArrayGenres';
+import { joinObject } from '../selectors/joinObject';
+import { postVideoGame, startDataGames } from '../actions/dataGames';
+import { errorCreateGame } from '../actions/dataError';
 
 export const CreateGame = () => {
 
+
+  const dispatch = useDispatch();
   const state = useSelector( state => state );
   const [addPlatform, setaddPlatform] = useState([]);
   const [addGenres, setaddGenres] = useState([]
@@ -21,41 +26,47 @@ export const CreateGame = () => {
 
   const [value, handleInputChange, reset, error] = useForm({
     name: '',
-    descripción: '',
+    description: '',
     released: '',
     rating: '',
   });
-  const {name, descripción, released, rating} = value;
+  const {name, description, released, rating} = value;
   
   // const platformTotal = getPlatforms(state.dataGame)
   // busco plataforma por redux
-
-  const handleAdd = () => {
-    console.log('resul')
+const handlePlatform =(id, name)=> {
+  // let data = platformTotal.find(plat => plat.id === id)
+  let data = state.game.dataPlatform.find(genre => genre.id === id)
+  getArrayPlatform(addPlatform,setaddPlatform, data, name)
   }
- 
+
+const handleGenres = (id, name) => {
+  let data = state.game.dataGenres.find(genre => genre.id === id)
+  getArrayGenres(addGenres, setaddGenres, data, name)
+}
+
+
 const handleSubmit = (e) => {
   e.preventDefault()
-console.log(validateGlobal(value, addPlatform, addGenres))
+let error = validateGlobal(value, addPlatform, addGenres);
+dispatch(errorCreateGame(error))
+ 
+let data = joinObject(value, addGenres, addPlatform);
+
+// no tiene q existir error
+if (!Object.keys(error).length) {
+  postVideoGame(data)
+  dispatch(startDataGames())
+}
 
  let a = e.target.check
  a.forEach(ele => ele.checked = false)
  reset()
+ setaddGenres([])
+ setaddPlatform([])
 }
 
-const handlePlatform =(id, name)=> {
-  // let data = platformTotal.find(plat => plat.id === id)
-  let data = state.dataPlatform.find(genre => genre.id === id)
-
-  getArrayPlatform(addPlatform,setaddPlatform,data,name)
-  }
-
-const handleGenres = (id, name) => {
-  let data = state.dataGenres.find(genre => genre.id === id)
-  getArrayGenres(addGenres, setaddGenres, data, name)
-}
-
-  if ( !state.length ) {
+  if ( !Object.keys(state.game).length ) {
     
     return <Navigate to="/videogame" />;
 }
@@ -82,11 +93,11 @@ const handleGenres = (id, name) => {
 
                     <label>Descripción</label>
                     <input
-                    name='descripción'
+                    name='description'
                     autoComplete='off'
                     type='text'
                     placeholder='Descripción'
-                    value={descripción}
+                    value={description}
                     onChange={handleInputChange}
                     ></input>
 
@@ -115,7 +126,7 @@ const handleGenres = (id, name) => {
                     <p>Platforms</p>
                     <ul>
                       {
-                        state.dataPlatform.map(ele=> (
+                        state.game.dataPlatform.map(ele=> (
                           <div  key={ele.id}>
                           <li >{ele.name}
                           <input name= {'check'} type='checkbox' onClick={()=>handlePlatform(ele.id, ele.name)} ></input>
@@ -135,7 +146,7 @@ const handleGenres = (id, name) => {
                     <p>Genres</p>
                     <ul>
                       {
-                        state.dataGenres.map(ele=> (
+                        state.game.dataGenres.map(ele=> (
                           <div  key={ele.id}>
                           <li >{ele.name}
                           <input name= {'check'} type='checkbox' onClick={()=>handleGenres(ele.id, ele.name)} ></input>
@@ -149,7 +160,7 @@ const handleGenres = (id, name) => {
                     
                 </form>
 
-                <button onClick={handleAdd}>Crear</button>
+              
             </div>
   
   </>;
