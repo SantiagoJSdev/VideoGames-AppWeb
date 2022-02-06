@@ -6,7 +6,6 @@ export const getGameByGenre = (data, name) => {
         return [];
     }
 
-    return data.filter( games => {
-       return games.genres.find(ele => ele.name === name) 
-    } );
+    return data.filter( game => game.genres.find(ele => ele.name === name) ) 
+
 };

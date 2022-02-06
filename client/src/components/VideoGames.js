@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {usePage} from '../hooks/usePage'
-import { useForm } from '../hooks/useForm'
+import { useFormVideoGame } from '../hooks/useFormVideoGame'
 
 import queryString from 'query-string';
 
@@ -12,7 +12,7 @@ import '../styles/videoGamesStyle.css'
 import { useSelect } from '../hooks/useSelect';
 import { getGameByGenre } from '../selectors/getGameByGenre';
 import { Nav } from './Nav';
-import { orderByRating, orderBySort, startDataGames, startDataGamesByName, startDataGenres } from '../actions/dataGames';
+import { orderByRating, orderBySort, postVideoGame, startDataGames, startDataGamesByName, startDataGenres, startDataPlatform } from '../actions/dataGames';
 
 
 
@@ -23,6 +23,7 @@ export const VideoGames = () => {
 useEffect(() => {
   dispatch(startDataGames()) 
   dispatch(startDataGenres())
+  dispatch(startDataPlatform())
 }, [dispatch]);
 
 
@@ -37,16 +38,18 @@ useEffect(() => {
 
   const {maximo, page, setpage} = usePage()
 
-  const [formValues, handleInputChange, reset] = useForm({
+  const [formValues, handleInputChange, reset] = useFormVideoGame({
     searchText: q
   })
   const {searchText} = formValues;
 
   const [selectValue, handleSelectChange] = useSelect('0')
-  
+ 
   // const gameFilterByName = useMemo(() => getGameByName( q, state.dataGame ), [q, state.dataGame ])
   const gameFilterByGenre = useMemo(() => getGameByGenre(state.dataGame, selectValue ), [ state.dataGame, selectValue ])
-
+  useEffect(() => {
+    console.log(gameFilterByGenre)
+  }, [selectValue,state.dataGame]);
   if (!state.dataGame) {
     return <h2>Loaging..</h2>
   }
@@ -86,13 +89,17 @@ useEffect(() => {
     }
 
     const onclick20 = () => {
-      // const data =   {
-      //   name: 'santiagoa',
-      //   description: 'hjghjgjgjhdshfah',
-      //   gender: "Action",
-      //   platforms: "Xbox One"
-      // }
-      // postVideoGame(data)
+      const data =   {
+        name: 'santiago',
+        description: 'hola',
+        rating: 1,
+        released: '11/10/2022',
+        platform: "Linux",
+        genre: "Action",
+    
+      }
+      postVideoGame(data)
+      dispatch(startDataGames()) 
       
     }
     const handleCreate = () => {
@@ -134,16 +141,7 @@ useEffect(() => {
           </div>
 
           {
-            // (gameFilterByName.length > 0) ?
-          //   <ul>
-          //  {
-          //   gameFilterByName.map(game => (
-          //     <li key={game.id}>{game.name}</li>
-          //   ))
-          //   }
-          //   </ul>
-          //   :
-
+           
             (gameFilterByGenre.length > 0) ?
               <div>
                 <ul>

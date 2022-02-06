@@ -2,7 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const axios = require("axios");
 
-const { Videogame, Platform, Gender } = require("../db");
+const { Videogame, Platform, Genre } = require("../db");
 const { API_KEY } = process.env;
 
 
@@ -14,7 +14,7 @@ const { API_KEY } = process.env;
     if (id.includes("-")) { //detectar UUID en DB
       const gameDataBase = await Videogame.findOne({
         where: { id },
-        include: [Gender, Platform],
+        include: [Genre, Platform],
       });
       return res.json(gameDataBase);
     }

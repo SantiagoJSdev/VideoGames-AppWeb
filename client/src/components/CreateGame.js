@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { useForm } from '../hooks/useForm';
+
 
 import '../styles/createGameStyles.css'
 
 
+import { useForm } from '../hooks/useForm';
 
-import { getPlatforms } from '../selectors/getPlatforms';
-import { validate } from '../selectors/validate';
 import { validateGlobal } from '../selectors/validateGlobal';
+import { getArrayPlatform } from '../selectors/getArrayPlatform';
+import { getArrayGenres } from '../selectors/getArrayGenres';
 
 export const CreateGame = () => {
-
-
 
   const state = useSelector( state => state );
   const [addPlatform, setaddPlatform] = useState([]);
   const [addGenres, setaddGenres] = useState([]
   );
-
-
 
   const [value, handleInputChange, reset, error] = useForm({
     name: '',
@@ -29,79 +26,40 @@ export const CreateGame = () => {
     rating: '',
   });
   const {name, descripción, released, rating} = value;
-  useEffect(() => {
-    console.log(error)
-   
-    
-  }, [value]);
-  // 
-
-  const platformTotal = getPlatforms(state.dataGame)
   
- 
-  const handleAdd = () => {
+  // const platformTotal = getPlatforms(state.dataGame)
+  // busco plataforma por redux
 
-   
-   
+  const handleAdd = () => {
     console.log('resul')
   }
  
-  const handlePlatform =(e,id, name)=> {
-  
-  let data = platformTotal.find(plat => plat.id === id)
-  let resul = false
-  addPlatform.filter(ele => {
-    if  (ele.name === name) {
-      resul = true
-      return setaddPlatform(a => (a.map(item => item.name === name ? {...item, completado: !item.completado} : item))) 
-    } 
-   })
-   if (!resul) {
-    return  setaddPlatform( a =>  [...a, {name: data.name, completado: true}])
-    }
-}
-
-
-
 const handleSubmit = (e) => {
   e.preventDefault()
-
-
 console.log(validateGlobal(value, addPlatform, addGenres))
 
  let a = e.target.check
  a.forEach(ele => ele.checked = false)
  reset()
-  
 }
 
+const handlePlatform =(id, name)=> {
+  // let data = platformTotal.find(plat => plat.id === id)
+  let data = state.dataPlatform.find(genre => genre.id === id)
+
+  getArrayPlatform(addPlatform,setaddPlatform,data,name)
+  }
 
 const handleGenres = (id, name) => {
-    let data = state.dataGenres.find(genre => genre.id === id)
-    let resul = false
-    // if (addGenres?.length === 0){
-    //  return setaddGenres( addP =>  [...addP, {name: data.name, completado: true}])
-    // }
-    addGenres.filter(ele=>{
-     if  (ele.name === name) {
-       resul = true
-       return setaddGenres(a => (a.map(item => item.name === name ? {...item, completado: !item.completado} : item))) 
-     } 
-    })
-      if (!resul) {
-      return  setaddGenres( a =>  [...a, {name: data.name, completado: true}])
-      }
+  let data = state.dataGenres.find(genre => genre.id === id)
+  getArrayGenres(addGenres, setaddGenres, data, name)
 }
 
-  if ( !platformTotal.length ) {
+  if ( !state.length ) {
     
     return <Navigate to="/videogame" />;
 }
 
-const focus = (e) => {
-  console.log('focus')
-  console.log(error)
-}
   return <>
   
             <div className='container-create'>
@@ -124,7 +82,6 @@ const focus = (e) => {
 
                     <label>Descripción</label>
                     <input
-                       onFocus={focus}
                     name='descripción'
                     autoComplete='off'
                     type='text'
@@ -158,10 +115,10 @@ const focus = (e) => {
                     <p>Platforms</p>
                     <ul>
                       {
-                        platformTotal.map(ele=> (
+                        state.dataPlatform.map(ele=> (
                           <div  key={ele.id}>
                           <li >{ele.name}
-                          <input name= {'check'} type='checkbox' defaultChecked = {false}  onClick={(e)=>handlePlatform(e,ele.id, ele.name)} ></input>
+                          <input name= {'check'} type='checkbox' onClick={()=>handlePlatform(ele.id, ele.name)} ></input>
                           </li>
                           </div>
                         ))

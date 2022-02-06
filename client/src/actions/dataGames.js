@@ -89,3 +89,21 @@ export const startAddGenres = (data) => {
         payload: data
     }
 }
+////////////////////////////////////
+export const startDataPlatform = () => {
+    return async (dispatch)=> {
+        try{
+        let resp = await fetch('http://localhost:3001/platform')
+        let data  = await resp.json()
+        dispatch(startAddPlatform(data))
+        }catch(e) {
+        console.log('platform not found')
+    }
+}
+}
+export const startAddPlatform = (data) => {
+    return {
+        type: types.GETDATABYPLATFORM,
+        payload: data
+    }
+}

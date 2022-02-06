@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { Gender } = require("../db");
+const { Genre } = require("../db");
 const { API_KEY } = process.env;
 
 
@@ -10,14 +10,14 @@ const getAllGender = async (req, res) => {
         const nameGender = url.data.results;
 
         nameGender.forEach(async (gende) => {
-            await Gender.findOrCreate({
+            await Genre.findOrCreate({
                 where: {
                     name: gende.name,
                 }
             })
         });
 
-        const allGender = await Gender.findAll();
+        const allGender = await Genre.findAll();
 
         res.status(200).json(allGender);
 

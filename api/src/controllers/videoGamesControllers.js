@@ -1,4 +1,4 @@
-const { Videogame, Gender, Platform } = require("../db");
+const { Videogame, Genre, Platform } = require("../db");
 const axios = require("axios");
 const { API_KEY, URL_API } = process.env;
 
@@ -37,9 +37,9 @@ const { API_KEY, URL_API } = process.env;
 }
 
 const baseData = async() => {
-
+    
     return await Videogame.findAll({
-        include: [Gender, Platform]
+        include: [Genre, Platform]
     })
 }
 
@@ -48,6 +48,8 @@ const  joinDataBase = async() => {
 
     const getApi = await getData()
     const getBaseDate = await baseData()
+   
+  
 
     dataNew = getApi.concat(getBaseDate)
     return dataNew;
