@@ -94,19 +94,56 @@ useEffect(() => {
     }
   return <>
 
-          <form onSubmit={handleSearchSubmit}>
-            <label>Buscar</label>
-            <input
-            type='text'
-            name='name'
-            autoComplete='off'
-            placeholder='Agregar Titulo'
-            value={name}
-            onChange={handleInputChange}
-            ></input>
-          </form>
 
-          <div className="custom-select">
+          <div className='container-videogames'>
+          <div className='container-videogames-interno'>
+          <div className='container-videogames-interno-left'>
+              <div className='videogames-side'></div>
+          </div>
+          <div className='container-videogames-interno-right'>
+
+              <div className='interno-right-nav'>
+
+                  <div className='videogames-search'>
+                          <form onSubmit={handleSearchSubmit}>
+                          
+                            <input
+                            className='search-input'
+                            type='text'
+                            name='name'
+                            autoComplete='off'
+                            placeholder='SEARCH'
+                            value={name}
+                            onChange={handleInputChange}
+                            ></input>
+                            <button className='search-btn' type='submit'></button>
+                          </form>
+                    </div>
+
+                    <div className='videogames-nav'>
+                          <div className='videogames-nav-content1'>
+                              <ul>
+                                <li className='content1-app'>APP</li>
+                                <li className='content1-game'>GAME</li>
+                                <li className='content1-create'>CREATE</li>
+                              </ul>
+                          </div>
+                          <div className='videogames-nav-content2'>
+                          <ul>
+                                <li className='content1-mail'></li>
+                                <li className='content1-login'></li>
+                               
+                              </ul>
+                          </div>
+                    </div>
+                </div>
+
+
+             <div className='videogames-header'> </div>
+
+
+             <div className='videogames-pages'>
+                <div className="custom-select">
                 <select value={selectValue} onChange={handleSelectChange}>
                   <option value="0">Select genre:</option>
                   <option value="Action">Action</option>
@@ -162,6 +199,13 @@ useEffect(() => {
           }
          
 
-<button onClick={handleCreate}> creacion de video juego</button>
+            <button onClick={handleCreate}> creacion de video juego</button>
+            </div>
+            <div className='videogames-CreateGame'> </div>
+          </div>
+            
+          
+            </div>
+            </div>
   </>;
 };

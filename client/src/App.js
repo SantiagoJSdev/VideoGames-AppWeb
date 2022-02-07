@@ -18,9 +18,22 @@ function App() {
 
 
   return (
-    <div className="App">
-      <h1>Henry Videogames</h1>
-      <button onClick={handleScreemPrincipal}>Page principal</button>
+    <div className="App-container">
+      <div className="App-container-interno">
+        <div className="interno-curva">
+            <div className="interno-curva-image"></div>
+        </div>
+        <div className="interno-curva-2"></div>
+        <div className="minicurva right-1"></div>
+        <div className="minicurva right-2"></div>
+        <div className="minicurva right-3"></div>
+        <div className="minicurva right-4"></div>
+
+      <h1 className='App-Title'>VIDEOGAMES</h1>
+      <button className='App-btn' onClick={handleScreemPrincipal}><p>Get it now</p></button>
+
+      </div>
+   
     </div>
   );
 }

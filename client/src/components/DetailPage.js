@@ -19,7 +19,7 @@ export const DetailPage = () => {
 
 
     
-    console.log(state)
+ 
     // aca obtengo el game x redux
     // const state = useSelector( state => state.dataGame );
     // const data =  getGameById(state, id);
