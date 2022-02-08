@@ -123,15 +123,15 @@ useEffect(() => {
                     <div className='videogames-nav'>
                           <div className='videogames-nav-content1'>
                               <ul>
-                                <li className='content1-app'>APP</li>
-                                <li className='content1-game'>GAME</li>
-                                <li className='content1-create'>CREATE</li>
+                                <li className='content1-app'><a href='www.google.com'>App</a></li>
+                                <li className='content1-game'><a href='www.google.com'>Game</a></li>
+                                <li className='content1-create'><a href='www.google.com'>New Game</a></li>
                               </ul>
                           </div>
                           <div className='videogames-nav-content2'>
                           <ul>
                                 <li className='content1-mail'></li>
-                                <li className='content1-login'></li>
+                                <li className='content1-login'>Login</li>
                                
                               </ul>
                           </div>
@@ -139,7 +139,16 @@ useEffect(() => {
                 </div>
 
 
-             <div className='videogames-header'> </div>
+             <div className='videogames-header'> 
+                <div className='videogames-header-interno btn-grad'>
+                    <div className='header-container'>
+                        <h1>VideoGames</h1>
+                        <p>Welcome to the app and game store</p>
+                        <button className='header-container-btn'>More</button>
+                        {/* <h3>More</h3> */}
+                    </div>
+                </div>
+             </div>
 
 
              <div className='videogames-pages'>
