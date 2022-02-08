@@ -1,0 +1,32 @@
+.nav-custom{
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+    justify-content: space-between;
+}
+.nav-select-1{ 
+    width: 100px;
+    height: 50px;
+    border-radius: 20px;
+    border: none;
+    background: rgb(70,55,242);
+    background: linear-gradient(90deg, rgba(70,55,242,1) 0%, rgba(100,60,248,1) 34%, rgba(136,67,254,1) 80%);
+    color: #ffffff;
+    font-size: 18px;
+}
+.nav-select-1 > option {
+    background: rgb(70,55,242);
+    /* background: linear-gradient(90deg, rgba(70,55,242,1) 0%, rgba(100,60,248,1) 34%, rgba(136,67,254,1) 80%); */
+    /* color: #000000; */
+    font-size: 18px;
+    border-radius: 20px;
+    border: none;
+}
+.nav-select-2{
+transform: translate(-500px);
+}
+.nav-select-3{
+    width: 140px;
+    transform: translate(-20px);
+}

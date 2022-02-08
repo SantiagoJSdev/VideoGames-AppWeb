@@ -223,7 +223,7 @@ gap: 20px;
     background-color: rgba(78, 88, 235, 0.3);
     border-radius: 20px;
     border: none;
-    margin-top: 30px;
+    /* margin-top: 30px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -286,18 +286,107 @@ gap: 20px;
 
 
 .videogames-pages{
-
+    width: 98%;
+    height: 460px;
+    background-color: rgba(78, 88, 235, 0.3);
+    border-radius: 20px;
+    margin-top: 33px;
 }
-.videogames-CreateGame{
-
+.videogames-pages-interno{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+}
+.videogames-pages-content2{
+    width: 100%;
+    height: 400px;
+    /* border: 2px solid wheat; */
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    padding-left: 40px;
+    /* margin-top: 10px; */
 }
 
 .ul-game {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
-img {
-    width: 100px;
+.ul-game-li{
+    width: 160px;
+    height: 170px;
+ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+
+   
+    background-color: rgba(78, 88, 235, 0.3);
+    border-radius: 20px;
+}
+.ul-game > li > a{
+    list-style: none;
+    text-decoration: none;
+    color: #ffffff;
+}
+.ul-game > li > a > p{
+    width: 100%;
+    height: 40px;
+  margin: 0;
+  margin-bottom: 5px;
+}
+.ul-game > li > a > img{
+    width: 120px;
     height: 100px;
+    object-fit: cover;
+    border-radius: 20px;
+    /* position: absolute; */
+    /* margin-top: px; */
+  }
+.videogames-pages-btn{
+position: absolute;
+right: 0;
+bottom: 0;
+transform: translate(-220px, -50px);
+display: flex;
+flex-direction: column;
+
+
+
+}
+.page-btn-1{
+width: 100px;
+height: 50px;
+border-radius: 20px;
+border: none;
+background: rgb(70,55,242);
+background: linear-gradient(90deg, rgba(70,55,242,1) 0%, rgba(100,60,248,1) 34%, rgba(136,67,254,1) 80%);
+color: #ffffff;
+font-size: 18px;
+transform: translate(55px, -50px);
+cursor: pointer;
+}
+.page-btn-2{
+    width: 100px;
+height: 50px;
+border-radius: 20px;
+border: none;
+background: rgb(70,55,242);
+background: linear-gradient(90deg, rgba(70,55,242,1) 0%, rgba(100,60,248,1) 34%, rgba(136,67,254,1) 80%);
+color: #ffffff;
+font-size: 18px;
+cursor: pointer;
+}
+.videogames-CreateGame{
+
 }

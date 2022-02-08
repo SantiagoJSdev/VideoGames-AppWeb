@@ -74,93 +74,99 @@ if (!Object.keys(error).length) {
   return <>
   
             <div className='container-create'>
-
-                <form onSubmit={handleSubmit}>
-                  <div>
-                      <label>Nombre</label>
-                      <input
-                      autoFocus
-                      className='input'
-                      name='name'
-                      autoComplete='off'
-                      type='text'
-                      placeholder='Name'
-                      value={name}
-                      onChange={handleInputChange}
-                      ></input>
-                       <div className='CreateValidation'>* Name is Required</div>
-                  </div>
-
-                    <label>Descripción</label>
-                    <input
-                    name='description'
-                    autoComplete='off'
-                    type='text'
-                    placeholder='Descripción'
-                    value={description}
-                    onChange={handleInputChange}
-                    ></input>
-
-                    <label>Fecha de lanzamiento</label>
-                    <input
-                    name='released'
-                    autoComplete='off'
-                    type='date'
-                    placeholder='Fecha'
-                    value={released}
-                    onChange={handleInputChange}
-                    ></input>
-
-                    <label>Rating</label>
-                    <input
-                    name='rating'
-                    autoComplete='off'
-                    type='number'
-                    min='0'
-                    max='5'
-                    placeholder='Rating'
-                    value={rating}
-                    onChange={handleInputChange}
-                    ></input>
-
-                    <p>Platforms</p>
-                    <ul>
-                      {
-                        state.game.dataPlatform.map(ele=> (
-                          <div  key={ele.id}>
-                          <li >{ele.name}
-                          <input name= {'check'} type='checkbox' onClick={()=>handlePlatform(ele.id, ele.name)} ></input>
-                          </li>
-                          </div>
-                        ))
-                        
-                      }
-                    </ul>
-                    {/* <select name='select' value={select} onChange={handleInputChange}>
-                    <option >Select:</option>
-                        {platform.map(p => (
-                            <option key= {p.name} value={p.name}>{p.name}</option>
-                        ))}
-                    </select> */}
-
-                    <p>Genres</p>
-                    <ul>
-                      {
-                        state.game.dataGenres.map(ele=> (
-                          <div  key={ele.id}>
-                          <li >{ele.name}
-                          <input name= {'check'} type='checkbox' onClick={()=>handleGenres(ele.id, ele.name)} ></input>
-                          </li>
-                          </div>
-                        ))
-                     
-                      }
-                    </ul>
-                  <button type='submit'>Add</button>
+                <div className='container-create-interno'>
+                    <h1>Create new game</h1>
+                    <form className='container-create-form' onSubmit={handleSubmit}>
+                      <div className='form-interno'>
+                          {/* <label>Nombre</label> */}
+                          <input
+                          autoFocus
+                          className='input-name'
+                          name='name'
+                          autoComplete='off'
+                          type='text'
+                          placeholder='Name'
+                          value={name}
+                          onChange={handleInputChange}
+                          ></input>
+                          <div className='CreateValidation'>* Name is Required</div>
                     
-                </form>
 
-              
+                        {/* <label>Descriptión</label> */}
+                        <input
+                        className='input-description'
+                        name='description'
+                        autoComplete='off'
+                        type='text'
+                        placeholder='Descriptión'
+                        value={description}
+                        onChange={handleInputChange}
+                        ></input>
+                        <div className='CreateValidation'>* Descriptión is Required</div>
+
+                        {/* <label>Fecha de lanzamiento</label> */}
+                        <input
+                        className='input-released'
+                        name='released'
+                        autoComplete='off'
+                        type='date'
+                        placeholder='Fecha'
+                        value={released}
+                        onChange={handleInputChange}
+                        ></input>
+                        <div className='CreateValidation'>* Released is Required</div>      
+                        {/* <label>Rating</label> */}
+                        <input
+                        className='input-rating'
+                        name='rating'
+                        autoComplete='off'
+                        type='number'
+                        min='0'
+                        max='5'
+                        placeholder='Rating'
+                        value={rating}
+                        onChange={handleInputChange}
+                        ></input>
+                        <div className='CreateValidation'>* Rating is Required</div>
+                        </div>
+                        <p>Platforms</p>
+                        <ul>
+                          {
+                            state.game.dataPlatform.map(ele=> (
+                              <div  key={ele.id}>
+                              <li >{ele.name}
+                              <input name= {'check'} type='checkbox' onClick={()=>handlePlatform(ele.id, ele.name)} ></input>
+                              </li>
+                              </div>
+                            ))
+                            
+                          }
+                        </ul>
+                        {/* <select name='select' value={select} onChange={handleInputChange}>
+                        <option >Select:</option>
+                            {platform.map(p => (
+                                <option key= {p.name} value={p.name}>{p.name}</option>
+                            ))}
+                        </select> */}
+
+                        <p>Genres</p>
+                        <ul>
+                          {
+                            state.game.dataGenres.map(ele=> (
+                              <div  key={ele.id}>
+                              <li >{ele.name}
+                              <input name= {'check'} type='checkbox' onClick={()=>handleGenres(ele.id, ele.name)} ></input>
+                              </li>
+                              </div>
+                            ))
+                        
+                          }
+                        </ul>
+                      <button type='submit'>Add</button>
+                        
+                    </form>
+
+                </div>
             </div>
   
   </>;
