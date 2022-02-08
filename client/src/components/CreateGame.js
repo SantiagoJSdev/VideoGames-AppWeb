@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 
 import '../styles/createGameStyles.css'
@@ -17,7 +17,7 @@ import { errorCreateGame } from '../actions/dataError';
 
 export const CreateGame = () => {
 
-
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const state = useSelector( state => state );
   const [addPlatform, setaddPlatform] = useState([]);
@@ -45,6 +45,9 @@ const handleGenres = (id, name) => {
   getArrayGenres(addGenres, setaddGenres, data, name)
 }
 
+useEffect(() => {
+  console.log(state.error.errorData)
+}, [error]);
 
 const handleSubmit = (e) => {
   e.preventDefault()
@@ -64,6 +67,9 @@ if (!Object.keys(error).length) {
  reset()
  setaddGenres([])
  setaddPlatform([])
+}
+const handleReturn=()=> {
+  navigate('/videogame')
 }
 
   if ( !Object.keys(state.game).length ) {
@@ -89,7 +95,11 @@ if (!Object.keys(error).length) {
                           value={name}
                           onChange={handleInputChange}
                           ></input>
-                          <div className='CreateValidation'>* Name is Required</div>
+                          <div 
+                          
+                          className={ !Object.keys(error).length ? 'CreateValidation ' : 'CreateValidation active'}
+                          
+                          >* Name is Required</div>
                     
 
                         {/* <label>Descriptión</label> */}
@@ -102,7 +112,8 @@ if (!Object.keys(error).length) {
                         value={description}
                         onChange={handleInputChange}
                         ></input>
-                        <div className='CreateValidation'>* Descriptión is Required</div>
+                        <div className={(state.error.errorData?.description === 'Description require')?'CreateValidation active': 'CreateValidation'}
+                        >* Descriptión is Required</div>
 
                         {/* <label>Fecha de lanzamiento</label> */}
                         <input
@@ -114,7 +125,8 @@ if (!Object.keys(error).length) {
                         value={released}
                         onChange={handleInputChange}
                         ></input>
-                        <div className='CreateValidation'>* Released is Required</div>      
+                        <div className={(state.error.errorData?.released === 'released require')?'CreateValidation active': 'CreateValidation'}
+                         >* Released is Required</div>       
                         {/* <label>Rating</label> */}
                         <input
                         className='input-rating'
@@ -127,8 +139,12 @@ if (!Object.keys(error).length) {
                         value={rating}
                         onChange={handleInputChange}
                         ></input>
-                        <div className='CreateValidation'>* Rating is Required</div>
+                        <div className={(state.error.errorData?.rating === 'rating require')?'CreateValidation active': 'CreateValidation'}
+                        
+                       >* Rating is Required</div> 
                         </div>
+                        <div className='div-platform-content'>
+                        <div className='div-platform'>
                         <p>Platforms</p>
                         <ul>
                           {
@@ -142,13 +158,19 @@ if (!Object.keys(error).length) {
                             
                           }
                         </ul>
+                       </div>
+                       <div className={(state.error.errorData?.platforms === 'Platforms require')?'CreateValidation-platforms active2': 'CreateValidation-platforms'}
+                        >* Platforms is Required</div> 
+                       </div>
+                      
                         {/* <select name='select' value={select} onChange={handleInputChange}>
                         <option >Select:</option>
                             {platform.map(p => (
                                 <option key= {p.name} value={p.name}>{p.name}</option>
                             ))}
                         </select> */}
-
+                         <div className='div-genres-content'>
+                        <div className='div-genres'>
                         <p>Genres</p>
                         <ul>
                           {
@@ -162,7 +184,12 @@ if (!Object.keys(error).length) {
                         
                           }
                         </ul>
-                      <button type='submit'>Add</button>
+                        </div>
+                        <div className={(state.error.errorData?.genres === 'Genres require')?'CreateValidation-platforms active2': 'CreateValidation-platforms'}
+                        >* Genres is Required</div> 
+                        </div>
+                      <button className='create-btn' type='submit'>Add</button>
+                      <button className='create-btn btn-return' onClick={handleReturn}>Return</button>
                         
                     </form>
 
