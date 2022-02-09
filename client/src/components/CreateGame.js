@@ -174,7 +174,7 @@ const handleReturn=()=> {
                         <p>Genres</p>
                         <ul>
                           {
-                            state.game.dataGenres.map(ele=> (
+                            state.game.dataGenres?.map(ele=> (
                               <div  key={ele.id}>
                               <li >{ele.name}
                               <input name= {'check'} type='checkbox' onClick={()=>handleGenres(ele.id, ele.name)} ></input>

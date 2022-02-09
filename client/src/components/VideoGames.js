@@ -49,6 +49,9 @@ export const VideoGames = () => {
   // const gameFilterByName = useMemo(() => getGameByName( q, state.dataGame ), [q, state.dataGame ])
   const gameFilterByGenre = useMemo(() => getGameByGenre(state.dataGame, selectValue), [state.dataGame, selectValue])
 
+useEffect(() => {
+  console.log(gameFilterByGenre)
+}, [gameFilterByGenre]);
 
   if (!state.dataGame) {
     return <h2>Loaging..</h2>
@@ -167,7 +170,18 @@ export const VideoGames = () => {
                     <div className='videogames-pages-content2'>
                     <ul className='ul-game'>
                     {
+                      (gameFilterByGenre.length > 15) ?
                       gameFilterByGenre?.slice((page - 1) * maximo, (page - 1) * maximo + maximo).map(game => (
+                        <li className='ul-game-li' key={game.id}>
+                          <Link to={`/detail/${game.id}`}>
+                            <p>{game.name}</p>
+                            <img src={game.image} alt={game.name} />
+                          </Link>
+                        </li>
+                      ))
+                      :
+                      // has esto
+                      gameFilterByGenre.map(game=>(
                         <li className='ul-game-li' key={game.id}>
                           <Link to={`/detail/${game.id}`}>
                             <p>{game.name}</p>
