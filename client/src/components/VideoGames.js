@@ -11,7 +11,6 @@ import queryString from 'query-string';
 import '../styles/videoGamesStyle.css'
 import { useSelect } from '../hooks/useSelect';
 import { getGameByGenre } from '../selectors/getGameByGenre';
-import { Nav } from './Nav';
 import { orderByRating, orderBySort, startDataGames, startDataGamesByName, startDataGenres, startDataPlatform } from '../actions/dataGames';
 import { ScreenPagination } from './ScreenPagination';
 
@@ -20,30 +19,28 @@ import { ScreenPagination } from './ScreenPagination';
 export const VideoGames = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state.game);
-
-
-  useEffect(() => {
-    dispatch(startDataGames())
-    dispatch(startDataGenres())
-    dispatch(startDataPlatform())
-  }, [dispatch]);
-
   const { maximo, page, setpage } = usePage()
   const location = useLocation();
   const navigate = useNavigate();
   const { q = '' } = queryString.parse(location.search);
   // const query = new URLSearchParams(location.search);
   // const q = query.get('q') || '';
-
-
-
-
-
-
   const [formValues, handleInputChange, reset, error] = useFormVideoGame({
     name: q
   })
   const { name } = formValues;
+  useEffect(() => {
+    console.log(name)
+    console.log(name.length)
+    dispatch(startDataGames())
+    dispatch(startDataGenres())
+    dispatch(startDataPlatform())
+  }, [dispatch, name]);
+
+ 
+
+ 
+  
 
   const [selectValue, handleSelectChange] = useSelect('0')
 
@@ -71,11 +68,16 @@ export const VideoGames = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
-    navigate(`?q=${name}`)
+    // navigate(`?q=${name}`)
 
-    dispatch(startDataGamesByName(name))
+    // dispatch(startDataGamesByName(name))
+    if (!Object.keys(error).length && name.length !== 0 ) {
+      navigate(`/search?q=${name}`)
+    }
+    
     reset()
-    navigate('/search')
+    
+    // navigate('/search')
   }
 
   const handleSort = (e) => {

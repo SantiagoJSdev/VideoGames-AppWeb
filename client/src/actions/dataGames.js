@@ -22,12 +22,16 @@ export const startAdd = (data) => {
 
 export const startDataGamesByName = (name) => {
     return async (dispatch)=> {
+      
         try{
             let resp = await fetch(`http://localhost:3001/videogames?name=${name}`)
             let  data  = await resp.json()
             dispatch(startAddByName(data))
         } catch(e) {
             console.log('Game not found')
+          
+            
+
         }
         
     }
