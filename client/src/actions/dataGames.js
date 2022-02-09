@@ -126,3 +126,17 @@ export const startAddByGameIdDB = (data) => {
         payload: data
     }
 }
+
+////search/api/////////////
+export const startSearchApi = (name) => {
+    return async (dispatch)=> {
+        try{
+            let resp = await fetch(`http://localhost:3001/search?name=${name}`)
+            let  data  = await resp.json()
+            console.log(data)
+        } catch(e) {
+            console.log('name not found')
+        }
+        
+    }
+}

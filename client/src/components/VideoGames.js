@@ -13,6 +13,7 @@ import { useSelect } from '../hooks/useSelect';
 import { getGameByGenre } from '../selectors/getGameByGenre';
 import { Nav } from './Nav';
 import { orderByRating, orderBySort, startDataGames, startDataGamesByName, startDataGenres, startDataPlatform } from '../actions/dataGames';
+import { ScreenPagination } from './ScreenPagination';
 
 
 
@@ -27,7 +28,7 @@ export const VideoGames = () => {
     dispatch(startDataPlatform())
   }, [dispatch]);
 
-
+  const { maximo, page, setpage } = usePage()
   const location = useLocation();
   const navigate = useNavigate();
   const { q = '' } = queryString.parse(location.search);
@@ -37,7 +38,7 @@ export const VideoGames = () => {
 
 
 
-  const { maximo, page, setpage } = usePage()
+
 
   const [formValues, handleInputChange, reset, error] = useFormVideoGame({
     name: q
@@ -47,11 +48,9 @@ export const VideoGames = () => {
   const [selectValue, handleSelectChange] = useSelect('0')
 
   // const gameFilterByName = useMemo(() => getGameByName( q, state.dataGame ), [q, state.dataGame ])
-  const gameFilterByGenre = useMemo(() => getGameByGenre(state.dataGame, selectValue), [state.dataGame, selectValue])
+  const gameFilterByGenre = useMemo(() => getGameByGenre(state.dataGame, selectValue, setpage), [state.dataGame, selectValue])
 
-useEffect(() => {
-  console.log(gameFilterByGenre)
-}, [gameFilterByGenre]);
+
 
   if (!state.dataGame) {
     return <h2>Loaging..</h2>
@@ -148,92 +147,24 @@ useEffect(() => {
               </div>
             </div>
           </div>
-
-
-          <div className='videogames-pages'>
-
-            {
-
-              (gameFilterByGenre.length > 0) ?
-            
-                <div className='videogames-pages-interno'>
-
-                <div className='videogames-pages-content1'>
-                        <Nav
-                          handleSort={handleSort}
-                          handleRating={handleRating}
-                          selectValue={selectValue}
-                          handleSelectChange={handleSelectChange}
-                        />
-                        </div>
-
-                    <div className='videogames-pages-content2'>
-                    <ul className='ul-game'>
-                    {
-                      (gameFilterByGenre.length > 15) ?
-                      gameFilterByGenre?.slice((page - 1) * maximo, (page - 1) * maximo + maximo).map(game => (
-                        <li className='ul-game-li' key={game.id}>
-                          <Link to={`/detail/${game.id}`}>
-                            <p>{game.name}</p>
-                            <img src={game.image} alt={game.name} />
-                          </Link>
-                        </li>
-                      ))
-                      :
-                      // has esto
-                      gameFilterByGenre.map(game=>(
-                        <li className='ul-game-li' key={game.id}>
-                          <Link to={`/detail/${game.id}`}>
-                            <p>{game.name}</p>
-                            <img src={game.image} alt={game.name} />
-                          </Link>
-                        </li>
-                      ))
-                    }
-                    </ul>
-                    <div className='videogames-pages-btn'>
-                      <button className='page-btn-1' onClick={handlePrevPage}>Prev page</button>
-                      <button className='page-btn-2' onClick={handleNextPage}>Next page</button>
-                    </div>
-                    </div>
-                    </div>
-              
-                :
-                  <div className='videogames-pages-interno'>
-
-                      <div className='videogames-pages-content1'>
-                        <Nav
-                          handleSort={handleSort}
-                          handleRating={handleRating}
-                          selectValue={selectValue}
-                          handleSelectChange={handleSelectChange}
-                        />
-                        </div>
-
-                        <div className='videogames-pages-content2'>
-                        <ul className='ul-game'>
-                        {
-                          state.dataGame?.slice((page - 1) * maximo, (page - 1) * maximo + maximo).map(game => (
-                            <li className='ul-game-li' key={game.id}>
-                              <Link to={`/detail/${game.id}`}>
-                                <p>{game.name}</p>
-                                <img src={game.image} alt={game.name} />
-                              </Link>
-                            </li>
-                          ))
-                        }
-                      </ul>
-                      <div className='videogames-pages-btn'>
-                          <button className='page-btn-1' onClick={handlePrevPage}>Prev page</button>
-                          <button className='page-btn-2' onClick={handleNextPage}>Next page</button>
-                      </div>
-                      </div>
-                      
-                    </div>
-
-            }
-
-          </div>
+  {/* ////////////////////////////aquiiiiiiiiiiiiiiiiiiiiiiiii/////////////// */}
+  {/* gameFilterByGenre, handleSort, handleRating, selectValue, 
+  handleSelectChange, handlePrevPage, handleNextPage */}
+  {/* maximo, page, setpage  */}
+          <ScreenPagination
+          gameFilterByGenre={gameFilterByGenre}
+          handleSort={handleSort}
+          handleRating={handleRating}
+          selectValue={selectValue}
+          handleSelectChange={handleSelectChange}
+          handlePrevPage={handlePrevPage}
+          handleNextPage={handleNextPage}
+          page={page}
+          maximo={maximo}
+          state={state}
+          />
+          
+            {/* ////////////////////////////aquiiiiiiiiiiiiiiiiiiiiiiiii/////////////// */}
           <div className='videogames-CreateGame'> </div>
         </div>
 
