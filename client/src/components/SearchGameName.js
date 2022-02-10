@@ -6,19 +6,23 @@ import { usePage } from '../hooks/usePage';
 
 import '../styles/searchGameStyles.css'
 import queryString from 'query-string';
+import { InputSearch } from './InputSearch';
+import { useFormVideoGame } from '../hooks/useFormVideoGame';
 
 export const SearchGameName = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const name  = queryString.parse(location.search) || '';
+  const name1  = queryString.parse(location.search) || '';
    // const query = new URLSearchParams(location.search);
   // const q = query.get('q') || '';
-
-  
+  const [formValues, handleInputChange, reset, error] = useFormVideoGame({
+    name: ''
+  })
+  const { name } = formValues;
   useEffect(() => {
     
-    dispatch(startDataGamesByName(name.q))
+    dispatch(startDataGamesByName(name1.q))
    
   }, [dispatch])
 
@@ -49,6 +53,15 @@ export const SearchGameName = () => {
   const handleSearch=()=>{
     dispatch(deleteAddByName())
     navigate('/videogame')
+  }
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault()
+    if (!Object.keys(error).length && name.length !== 0 ) {
+      dispatch(startDataGamesByName(name))
+
+    }
+    reset()
   }
 
   return <>
@@ -99,6 +112,12 @@ export const SearchGameName = () => {
             <ul>
               <li onClick={handleSearch} className='search-mail'>Return</li>
             </ul>
+            <InputSearch
+            handleSearchSubmit={handleSearchSubmit}
+            handleInputChange={handleInputChange}
+            name={name}
+            style={'inputPageSearch'}
+            />
             </div>
           </div>
 

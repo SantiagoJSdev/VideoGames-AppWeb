@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import App from '../App';
 import { CreateGame } from '../components/CreateGame';
 import { DetailPage } from '../components/DetailPage';
@@ -17,6 +17,7 @@ export const AppRouter = () => {
             <Route path="/search" element= {<SearchGameName/>}/>
             <Route path="/detail/:id" element= {<DetailPage/>}/>
             <Route path="/create" element= {<CreateGame/>}/>
+            <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
 

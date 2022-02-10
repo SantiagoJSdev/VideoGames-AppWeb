@@ -13,6 +13,7 @@ import { useSelect } from '../hooks/useSelect';
 import { getGameByGenre } from '../selectors/getGameByGenre';
 import { orderByRating, orderBySort, startDataGames, startDataGamesByName, startDataGenres, startDataPlatform } from '../actions/dataGames';
 import { ScreenPagination } from './ScreenPagination';
+import { InputSearch } from './InputSearch';
 
 
 
@@ -103,28 +104,18 @@ export const VideoGames = () => {
         <div className='container-videogames-interno-right'>
 
           <div className='interno-right-nav'>
-
-            <div className='videogames-search'>
-              <form onSubmit={handleSearchSubmit}>
-
-                <input
-                  className='search-input'
-                  type='text'
-                  name='name'
-                  autoComplete='off'
-                  placeholder='SEARCH'
-                  value={name}
-                  onChange={handleInputChange}
-                ></input>
-                <button className='search-btn' type='submit'></button>
-              </form>
-            </div>
-
+{/* //////////////////////videogames-search//////////////// */}
+            <InputSearch
+            handleSearchSubmit={handleSearchSubmit}
+            handleInputChange={handleInputChange}
+            name={name}
+            />
+{/* ///////////////////////////////////////// */}
             <div className='videogames-nav'>
               <div className='videogames-nav-content1'>
                 <ul>
-                  <li className='content1-app'><a href='www.google.com'>App</a></li>
-                  <li className='content1-game'><a href='www.google.com'>Game</a></li>
+                  <li className='content1-app'><Link to={'/'}>App</Link></li>
+                  <li className='content1-game'><Link to={'/'}>Game</Link></li>
                   <li className='content1-create'><Link to={'/create'}>New Game</Link></li>
                 </ul>
               </div>

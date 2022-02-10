@@ -103,5 +103,12 @@ align-items: center;
                     box-shadow: #fd701400 0 0 0 20px ;
                 }
             }
+            .inputPageSearch{
+                position: absolute;
+                position: absolute;
+                top: 0;
+                left: 0;
+                transform: translate(250px, 160px);
+            }
             
             
