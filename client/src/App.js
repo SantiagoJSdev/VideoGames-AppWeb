@@ -23,7 +23,9 @@ function App() {
         <div className="interno-curva">
             <div className="interno-curva-image"></div>
         </div>
-        <div className="interno-curva-2"></div>
+        <div className="interno-curva-2">
+            <div className="interno-curva-2-image"></div>
+        </div>
         <div className="minicurva right-1"></div>
         <div className="minicurva right-2"></div>
         <div className="minicurva right-3"></div>

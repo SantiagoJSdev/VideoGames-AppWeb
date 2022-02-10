@@ -145,3 +145,13 @@ transform: translate(-100px, -100px);
     color: white;
     box-shadow: inset 0px 0px 17px 15px rgba(0, 0, 0, 0.5);
   }
+  .interno-curva-2-image{
+    width: 100%;
+  height: 100%;
+  /* background-image: url(https://user-images.githubusercontent.com/87577172/153315899-c5f9e86f-96de-4d07-b04f-8eff95c70d15.jpg); */
+  background-repeat: no-repeat;
+  background-size: 80%;
+  /* position: absolute; */
+  /* transform: translate(50px, 200px); */
+  }
+

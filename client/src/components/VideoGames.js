@@ -11,7 +11,7 @@ import queryString from 'query-string';
 import '../styles/videoGamesStyle.css'
 import { useSelect } from '../hooks/useSelect';
 import { getGameByGenre } from '../selectors/getGameByGenre';
-import { orderByRating, orderBySort, startDataGames, startDataGamesByName, startDataGenres, startDataPlatform } from '../actions/dataGames';
+import { orderByRating, orderBySort, startDataGames, startDataGenres, startDataPlatform } from '../actions/dataGames';
 import { ScreenPagination } from './ScreenPagination';
 import { InputSearch } from './InputSearch';
 
@@ -31,12 +31,10 @@ export const VideoGames = () => {
   })
   const { name } = formValues;
   useEffect(() => {
-    console.log(name)
-    console.log(name.length)
     dispatch(startDataGames())
     dispatch(startDataGenres())
     dispatch(startDataPlatform())
-  }, [dispatch, name]);
+  }, [dispatch]);
 
  
 
@@ -46,12 +44,18 @@ export const VideoGames = () => {
   const [selectValue, handleSelectChange] = useSelect('0')
 
   // const gameFilterByName = useMemo(() => getGameByName( q, state.dataGame ), [q, state.dataGame ])
-  const gameFilterByGenre = useMemo(() => getGameByGenre(state.dataGame, selectValue, setpage), [state.dataGame, selectValue])
+  const gameFilterByGenre = useMemo(() => getGameByGenre(state.dataGame, selectValue, setpage), [state.dataGame, selectValue, setpage])
 
 
 
   if (!state.dataGame) {
-    return <h2>Loaging..</h2>
+    return <div className='Loading'>
+      <h2 className='animation-loading'>
+      <div></div>
+      <div></div>
+      <div></div>
+      </h2>
+    </div>
   }
 
   const handleNextPage = () => {
@@ -83,13 +87,13 @@ export const VideoGames = () => {
 
   const handleSort = (e) => {
     e.preventDefault();
-    console.log(e.target.value)
+
     dispatch(orderBySort(e.target.value))
 
   }
   const handleRating = (e) => {
     e.preventDefault();
-    console.log(e.target.value)
+    
     dispatch(orderByRating(e.target.value))
   }
 

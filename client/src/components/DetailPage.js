@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { startDataGamesByIdDataBase } from '../actions/dataGames';
 import '../styles/detailStyles.css'
 import { CardCss } from './CardCss';
@@ -18,14 +18,20 @@ export const DetailPage = () => {
 
     const state = useSelector(state => state.game.dataGameById);
 
-    const handleDetail=()=>{
+    const handleDetail = () => {
         navigate('/videogame')
     }
     // aca obtengo el game x redux
     // const state = useSelector( state => state.game.dataGame );
     // const data =  getGameById(state, id);
     if (!state) {
-        return <h1>Loading</h1>
+        return <div className='Loading'>
+            <h2 className='animation-loading'>
+                <div></div>
+                <div></div>
+                <div></div>
+            </h2>
+        </div>
     }
 
     // if ( !Object.keys(state).length ) {
@@ -63,7 +69,7 @@ export const DetailPage = () => {
                                             released={state.released}
                                             img={state.background_image}
                                         />
-                                    <button onClick={handleDetail} className='detail-btn'>Return</button>
+                                        <button onClick={handleDetail} className='detail-btn'>Return</button>
                                     </li>
                                     :
                                     ''
@@ -98,10 +104,10 @@ export const DetailPage = () => {
                         <h2>Rating:</h2>
                         <ul>
                             <li>
-                            <h4>{state.rating}</h4>
+                                <h4>{state.rating}</h4>
                             </li>
                         </ul>
-                       
+
                     </div>
                 </div>
             </div>

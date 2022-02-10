@@ -24,12 +24,12 @@ export const SearchGameName = () => {
     
     dispatch(startDataGamesByName(name1.q))
    
-  }, [dispatch])
+  }, [dispatch, name1.q])
 
   const { maximo, page, setpage } = usePage()
 
   const state = useSelector(state => state.game.dataName);
-  console.log(state,'1')
+  
   
  
 
@@ -48,7 +48,13 @@ export const SearchGameName = () => {
   }
 
   if (!state) {
-    return <h1>Loading</h1>
+    return <div className='Loading'>
+      <h2 className='animation-loading'>
+      <div></div>
+      <div></div>
+      <div></div>
+      </h2>
+    </div>
   }
   const handleSearch=()=>{
     dispatch(deleteAddByName())
@@ -63,7 +69,10 @@ export const SearchGameName = () => {
     }
     reset()
   }
-
+const styleinput = {
+  
+  nombre:'inputPageSearch'
+}
   return <>
 
     <div className='container-search'>
@@ -116,7 +125,7 @@ export const SearchGameName = () => {
             handleSearchSubmit={handleSearchSubmit}
             handleInputChange={handleInputChange}
             name={name}
-            style={'inputPageSearch'}
+            style={styleinput}
             />
             </div>
           </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 
@@ -45,15 +45,10 @@ const handleGenres = (id, name) => {
   getArrayGenres(addGenres, setaddGenres, data, name)
 }
 
-useEffect(() => {
-  console.log(state.error.errorData)
-}, [error]);
-
 const handleSubmit = (e) => {
   e.preventDefault()
 let error = validateGlobal(value, addPlatform, addGenres);
 dispatch(errorCreateGame(error))
- 
 let data = joinObject(value, addGenres, addPlatform);
 
 // no tiene q existir error

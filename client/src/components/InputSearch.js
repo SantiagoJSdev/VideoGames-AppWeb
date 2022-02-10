@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const InputSearch = ({handleSearchSubmit, handleInputChange, name, style}) => {
+export const InputSearch = ({handleSearchSubmit, handleInputChange, name, style = ''}) => {
   return (
     <>
-     <div className= {`${style} videogames-search` } >
+     <div className= {`${style.nombre} videogames-search` } >
               <form onSubmit={handleSearchSubmit}>
 
                 <input
