@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { usePage } from '../hooks/usePage'
 import { useFormVideoGame } from '../hooks/useFormVideoGame'
 
-import queryString from 'query-string';
+
 
 // import {getGameByName} from '../selectors/getGameByName'
 
@@ -20,14 +20,13 @@ import { InputSearch } from './InputSearch';
 export const VideoGames = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state.game);
+
   const { maximo, page, setpage } = usePage()
-  const location = useLocation();
+  
   const navigate = useNavigate();
-  const { q = '' } = queryString.parse(location.search);
-  // const query = new URLSearchParams(location.search);
-  // const q = query.get('q') || '';
+
   const [formValues, handleInputChange, reset, error] = useFormVideoGame({
-    name: q
+    name: ''
   })
   const { name } = formValues;
   useEffect(() => {
@@ -35,11 +34,6 @@ export const VideoGames = () => {
     dispatch(startDataGenres())
     dispatch(startDataPlatform())
   }, [dispatch]);
-
- 
-
- 
-  
 
   const [selectValue, handleSelectChange] = useSelect('0')
 
@@ -73,16 +67,12 @@ export const VideoGames = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
-    // navigate(`?q=${name}`)
-
-    // dispatch(startDataGamesByName(name))
+   
     if (!Object.keys(error).length && name.length !== 0 ) {
       navigate(`/search?q=${name}`)
     }
     
     reset()
-    
-    // navigate('/search')
   }
 
   const handleSort = (e) => {
@@ -144,10 +134,7 @@ export const VideoGames = () => {
               </div>
             </div>
           </div>
-  {/* ////////////////////////////aquiiiiiiiiiiiiiiiiiiiiiiiii/////////////// */}
-  {/* gameFilterByGenre, handleSort, handleRating, selectValue, 
-  handleSelectChange, handlePrevPage, handleNextPage */}
-  {/* maximo, page, setpage  */}
+  
           <ScreenPagination
           gameFilterByGenre={gameFilterByGenre}
           handleSort={handleSort}

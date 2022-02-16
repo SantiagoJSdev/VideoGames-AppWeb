@@ -63,7 +63,8 @@ export const orderByRating = (value) => {
     }
 }
 
-export const postVideoGame = async (data)=> {
+export const 
+postVideoGame = async (data)=> {
 
         const post = await fetch("http://localhost:3001/videogames", {
             method: 'POST',

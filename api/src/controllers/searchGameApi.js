@@ -10,9 +10,10 @@ const searchGameApi = async (req, res) => {
     let url = `https://api.rawg.io/api/games?key=${API_KEY}&search=${name}`
 
     try {
+    
         const searchApi = await axios.get(url);
         const game = searchApi.data.results;
-        
+         
         res.status(200).json(game);
         
     } catch (error) {

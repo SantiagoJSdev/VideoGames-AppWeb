@@ -10,6 +10,7 @@ const getAllGender = async (req, res) => {
         const nameGender = url.data.results;
 
         nameGender.forEach(async (gende) => {
+            // busca o crea
             await Genre.findOrCreate({
                 where: {
                     name: gende.name,

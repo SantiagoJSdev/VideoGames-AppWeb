@@ -12,7 +12,9 @@ const { API_KEY } = process.env;
   const { id } = req.params;
   
   try {
-    if (id.includes("-")) { //detectar UUID en DB
+    if (id.includes("-")) { 
+      //detectar UUID en DB
+      //encuentra uno
       const gameDataBase = await Videogame.findOne({
         where: { id },
         include: [Genre, Platform],
